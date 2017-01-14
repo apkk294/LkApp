@@ -1,5 +1,6 @@
 package com.lk.lkapp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -82,8 +83,17 @@ public class LolNewsFragment extends BaseFragment implements LolNewsContract.Vie
         mRvLolNews.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                startActivity(LolNewsContentActivity.getCallingIntent(getContext(),
-                        (LolNewsListBean.ListBean) baseQuickAdapter.getItem(i)));
+                int[] picLocation = new int[2];
+                view.findViewById(R.id.iv_pic).getLocationOnScreen(picLocation);
+
+                Intent intent = LolNewsContentActivity.getCallingIntent(getContext(),
+                        (LolNewsListBean.ListBean) baseQuickAdapter.getItem(i));
+                intent.putExtra("left", picLocation[0]);
+                intent.putExtra("top", picLocation[1]);
+                intent.putExtra("width", view.findViewById(R.id.iv_pic).getWidth());
+                intent.putExtra("height", view.findViewById(R.id.iv_pic).getHeight());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
             }
         });
         mRvLolNews.setAdapter(mAdapter);

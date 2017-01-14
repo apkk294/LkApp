@@ -33,6 +33,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lk.lkapp.ui.MainActivity"/>
         </activity>
+        <activity android:name=".ui.activity.ChartViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

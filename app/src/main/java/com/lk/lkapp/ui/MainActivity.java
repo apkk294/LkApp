@@ -19,6 +19,7 @@ import com.lk.lkapp.R;
 import com.lk.lkapp.base.BaseActivity;
 import com.lk.lkapp.base.BaseFragment;
 import com.lk.lkapp.ui.fragment.AboutFragment;
+import com.lk.lkapp.ui.fragment.CustomWidgetFragment;
 import com.lk.lkapp.ui.fragment.LolNewsFragment;
 
 import butterknife.BindView;
@@ -26,12 +27,14 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String FRAGMENT_TAG_LOL_NEWS = "lol_news";
-    private static final String FRAGMENT_TAG_ABOUT    = "about";
-    private static final String FRAGMENT_TYPE         = "FRAGMENT_TYPE";
+    private static final String FRAGMENT_TAG_LOL_NEWS  = "lol_news";
+    private static final String FRAGMENT_TAG_ABOUT     = "about";
+    private static final String FRAGMENT_CUSTOM_WIDGET = "custom_widget";
+    private static final String FRAGMENT_TYPE          = "FRAGMENT_TYPE";
 
-    private LolNewsFragment mLolNewsFragment;
-    private AboutFragment   mAboutFragment;
+    private LolNewsFragment      mLolNewsFragment;
+    private CustomWidgetFragment mCustomWidgetFragment;
+    private AboutFragment        mAboutFragment;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -82,6 +85,7 @@ public class MainActivity extends BaseActivity
 
         mLolNewsFragment = LolNewsFragment.newInstance();
         mAboutFragment = AboutFragment.newInstance();
+        mCustomWidgetFragment = new CustomWidgetFragment();
 
         currentFragmentType = currentFragmentType == null ?
                 FRAGMENT_TAG_LOL_NEWS : currentFragmentType;
@@ -133,6 +137,8 @@ public class MainActivity extends BaseActivity
 
     private BaseFragment getChildFragmentByTag(String childFragmentTag) {
         switch (childFragmentTag) {
+            case FRAGMENT_CUSTOM_WIDGET:
+                return mCustomWidgetFragment;
             case FRAGMENT_TAG_ABOUT:
                 return mAboutFragment;
             case FRAGMENT_TAG_LOL_NEWS:
@@ -185,6 +191,9 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_about) {
             mToolbar.setTitle(R.string.about);
             setCurrentFragment(FRAGMENT_TAG_ABOUT);
+        } else if (id == R.id.nav_custom_widget) {
+            mToolbar.setTitle(R.string.custom_widget);
+            setCurrentFragment(FRAGMENT_CUSTOM_WIDGET);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
