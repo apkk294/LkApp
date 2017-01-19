@@ -65,6 +65,12 @@ public class LolNewsFragment extends BaseFragment implements LolNewsContract.Vie
         DaggerLolNewsComponent.builder().lolNewsModule(new LolNewsModule(this)).build().inject(this);
 
         mRefresh.setOnRefreshListener(this);
+        mRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                mRefresh.setRefreshing(true);
+            }
+        });
 
         mAdapter = new BaseQuickAdapter<LolNewsListBean.ListBean, BaseViewHolder>
                 (R.layout.item_lol_news, new ArrayList<LolNewsListBean.ListBean>()) {
@@ -113,7 +119,12 @@ public class LolNewsFragment extends BaseFragment implements LolNewsContract.Vie
 
     @Override
     public void onLoadNewsList(LolNewsListBean newsListBean) {
-        mRefresh.setRefreshing(false);
+        mRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                mRefresh.setRefreshing(false);
+            }
+        });
         mAdapter.setNewData(newsListBean.getList());
     }
 
