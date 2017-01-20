@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mLolNewsFragment = LolNewsFragment.newInstance();
+        mLolNewsFragment = new LolNewsFragment();
         mAboutFragment = AboutFragment.newInstance();
         mCustomWidgetFragment = new CustomWidgetFragment();
 
