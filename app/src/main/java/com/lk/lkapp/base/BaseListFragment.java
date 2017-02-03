@@ -1,5 +1,7 @@
 package com.lk.lkapp.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -68,13 +70,29 @@ public abstract class BaseListFragment<T, K extends BaseViewHolder> extends Base
         mRecycler.setAdapter(mListAdapter);
     }
 
-    protected abstract BaseQuickAdapter<T, K> setListAdapter();
-
-    protected abstract void onRequestRefresh();
-
-    protected abstract void onRequestLoadMore();
-
-    protected void onItemClickListener(BaseQuickAdapter<T, K> adapter, View itemView, int position){};
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        requestData();
+    }
 
     protected void configRecyclerView(RecyclerView recyclerView) {}
+
+    protected abstract BaseQuickAdapter<T, K> setListAdapter();
+
+    protected abstract void requestData();
+
+    protected void onRequestRefresh() {
+        mListPage = 0;
+        requestData();
+    }
+
+    protected void onRequestLoadMore() {
+        mListPage++;
+        requestData();
+    }
+
+    protected void onItemClickListener(BaseQuickAdapter<T, K> adapter, View itemView, int position) {
+    }
+
 }

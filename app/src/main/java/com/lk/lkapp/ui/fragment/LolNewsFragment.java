@@ -49,21 +49,14 @@ public class LolNewsFragment extends BaseListFragment<LolNewsListBean.ListBean, 
     }
 
     @Override
-    protected void onRequestRefresh() {
-        mLolNewsPresenter.loadNewsList(mListPage = 0);
+    protected void requestData() {
+        mLolNewsPresenter.loadNewsList(mListPage);
     }
-
-    @Override
-    protected void onRequestLoadMore() {
-        mLolNewsPresenter.loadNewsList(++mListPage);
-    }
-
 
     @Override
     protected void initView() {
         super.initView();
         DaggerLolNewsComponent.builder().lolNewsModule(new LolNewsModule(this)).build().inject(this);
-        mLolNewsPresenter.loadNewsList(mListPage = 0);
     }
 
     @Override
