@@ -101,4 +101,9 @@
     </string>
     <string name="chart_widget">图表</string>
     <string name="custom_widget">自定义View</string>
+    <string name="btn_nested_scroll">滑动嵌套</string>
+    <string name="behavior_contents">com.lk.lkapp.custom.behavior.UcNewsContentBehavior</string>
+    <string name="behavior_uc_header_pager">com.lk.lkapp.custom.behavior.UcNewsHeaderPagerBehavior</string>
+    <string name="behavior_uc_title">com.lk.lkapp.custom.behavior.UcNewsTitleBehavior</string>
+    <string name="behavior_uc_news_tab">com.lk.lkapp.custom.behavior.UcNewsTabBehavior</string>
 </resources>

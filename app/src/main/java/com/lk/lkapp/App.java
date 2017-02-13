@@ -25,16 +25,24 @@ import java.io.File;
 
 public class App extends Application {
 
+    private static Context mAppContext;
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+
+        mAppContext = this;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
         configImageLoader();
+    }
+
+    public static Context getAppContext() {
+        return mAppContext;
     }
 
     private void configImageLoader() {
